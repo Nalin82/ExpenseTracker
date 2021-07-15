@@ -78,7 +78,7 @@ import { UserLoginGuard } from 'src/shared/UserLoginGuard';
     Client,
     {
       provide: API_BASE_URL,
-      useValue: 'https://expensebalanceapi.azurewebsites.net/',
+      useValue: 'https://localhost:5001/',
     },
     AdminLoginGuard,
     UserLoginGuard,
