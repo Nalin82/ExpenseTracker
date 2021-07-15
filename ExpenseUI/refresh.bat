@@ -1,0 +1,1 @@
+dotnet run --project ../APIClientGenerator http://localhost:5000/swagger/v1/swagger.json src/shared/service-proxies/client.ts

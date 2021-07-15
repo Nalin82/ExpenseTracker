@@ -1,0 +1,5 @@
+﻿Add-Migration InitialCreate -Context ExpenseDbContext -OutputDir Migrations\DomainObjects
+Add-Migration InitialCreate -Context AuthenticationDbContext -OutputDir Migrations\IdentityObjects
+
+Update-Database -Context ExpenseDbContext
+Update-Database -Context AuthenticationDbContext

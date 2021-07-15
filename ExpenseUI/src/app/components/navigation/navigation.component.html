@@ -1,0 +1,43 @@
+<mat-toolbar color="primary">
+  <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon"
+    (click)="onToggleDrawer()">
+    <mat-icon *ngIf="!isSideNavOpen">menu</mat-icon>
+    <mat-icon *ngIf="isSideNavOpen">close</mat-icon>
+  </button>
+  <span>Expense App</span>
+  <span class="example-spacer"></span>
+  <app-login-menu (closeNav)="closeSideNavDrawer()"></app-login-menu>
+</mat-toolbar>
+<mat-sidenav-container class="example-container" autosize>
+  <mat-sidenav #drawer mode="side" class="example-sidenav-links">
+    <mat-nav-list>
+      <mat-list-item *ngIf="userRole==='Admin'" class="expense-navigation">
+        <button mat-icon-button (click)="routeTo('graph')">
+          <mat-icon>dashboard</mat-icon>
+        </button>
+        <a matLine routerLink='/graph'>Graph View</a>
+      </mat-list-item>
+      <mat-list-item *ngIf="userRole==='Admin'" class="expense-navigation">
+        <button mat-icon-button (click)="routeTo('upload')">
+          <mat-icon>upload</mat-icon>
+        </button>
+        <a matLine routerLink='/upload'>Upload</a>
+      </mat-list-item>
+      <mat-list-item *ngIf="userRole==='User'" class="expense-navigation">
+        <button mat-icon-button (click)="routeTo('expense')">
+          <mat-icon>account_balance_wallet</mat-icon>
+        </button>
+        <a matLine routerLink='/expense'>Expenses</a>
+      </mat-list-item>
+      <mat-list-item *ngIf="userRole==='Admin'" class="expense-navigation">
+        <button mat-icon-button (click)="routeTo('user')">
+          <mat-icon>account_circle</mat-icon>
+        </button>
+        <a matLine routerLink='/user'>Manage Users</a>
+      </mat-list-item>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

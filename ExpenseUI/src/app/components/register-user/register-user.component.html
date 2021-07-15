@@ -1,0 +1,35 @@
+<div class="container">
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-5">
+            <form [formGroup]="registerFormGroup" class="text-center border border-light p-5" action="#!"
+                (submit)="registerUser()">
+                <p class="h4 mb-4">Register User</p>
+                <mat-form-field appearance="fill" class="user-form-input">
+                    <mat-label>User Name</mat-label>
+                    <input matInput formControlName="userNameFormControl">
+                </mat-form-field>
+                <mat-form-field appearance="fill" class="user-form-input">
+                    <mat-label>Password</mat-label>
+                    <input matInput type="password" formControlName="passwordFormControl">
+                </mat-form-field>
+                <mat-form-field class="user-form-input" appearance="fill">
+                    <mat-label>Email</mat-label>
+                    <input type="email" matInput formControlName="emailFormControl" placeholder="Ex. pat@example.com">
+                    <mat-error
+                        *ngIf="registerFormGroup.controls.emailFormControl.hasError('email') && !registerFormGroup.controls.emailFormControl.hasError('required')">
+                        Please enter a valid email address
+                    </mat-error>
+                    <mat-error *ngIf="registerFormGroup.controls.emailFormControl.hasError('required')">
+                        Email is <strong>required</strong>
+                    </mat-error>
+                </mat-form-field>
+                <button [disabled]="!registerFormGroup.valid" mat-raised-button color="primary"
+                    type="submit">Register</button>
+                <br />
+                <br />
+                <p class="text-center">Already Registered!! Please proceed to <a
+                        routerLink='/login'><b><u>Login</u></b></a> </p>
+            </form>
+        </div>
+    </div>
+</div>

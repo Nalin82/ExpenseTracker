@@ -1,0 +1,32 @@
+<div class="container">
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-10 text-center">
+            <div *ngIf="isLoading" class="loader">
+                <mat-spinner></mat-spinner>
+            </div>
+            <mat-form-field appearance="fill" class="fill">
+                <mat-label>Month and Year</mat-label>
+                <input matInput [matDatepicker]="dpFrom" [formControl]="fromDateFormControl">
+                <mat-datepicker-toggle matSuffix [for]="dpFrom"></mat-datepicker-toggle>
+                <mat-datepicker #dpFrom startView="multi-year" (yearSelected)="chosenFromYearHandler($event)"
+                    (monthSelected)="chosenFromMonthHandler($event, dpFrom)" panelClass="example-month-picker">
+                </mat-datepicker>
+            </mat-form-field>
+            <mat-form-field appearance="fill" class="fill">
+                <mat-label>Month and Year</mat-label>
+                <input matInput [matDatepicker]="dpTo" [formControl]="toDateFormControl">
+                <mat-datepicker-toggle matSuffix [for]="dpTo"></mat-datepicker-toggle>
+                <mat-datepicker #dpTo startView="multi-year" (yearSelected)="chosenToYearHandler($event)"
+                    (monthSelected)="chosenToMonthHandler($event, dpTo)" panelClass="example-month-picker">
+                </mat-datepicker>
+            </mat-form-field>
+            <button mat-raised-button color="primary" (click)="refreshData()">Refresh Data</button>
+            <div style="display: block; width: 100%; height: 60%;">
+                <canvas baseChart [datasets]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions"
+                    [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType"
+                    [plugins]="lineChartPlugins">
+                </canvas>
+            </div>
+        </div>
+    </div>
+</div>

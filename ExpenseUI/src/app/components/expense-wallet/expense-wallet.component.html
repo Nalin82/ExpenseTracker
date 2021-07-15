@@ -1,0 +1,68 @@
+<h1>Expense Balances</h1>
+<div class="container">
+  <div class="row justify-content-center mt-5">
+    <div class="col-md-5 text-center">
+      <div *ngIf="isLoading" class="loader">
+        <mat-spinner></mat-spinner>
+      </div>
+      <mat-form-field appearance="fill" class="fill">
+        <mat-label>Month and Year</mat-label>
+        <input matInput [matDatepicker]="dpFrom" [formControl]="fromDateFormControl" (dateChange)="addEvent($event)">
+        <mat-datepicker-toggle matSuffix [for]="dpFrom"></mat-datepicker-toggle>
+        <mat-datepicker #dpFrom startView="multi-year" (yearSelected)="chosenFromYearHandler($event)"
+          (monthSelected)="chosenFromMonthHandler($event, dpFrom)" panelClass="example-month-picker">
+        </mat-datepicker>
+      </mat-form-field>
+
+
+    </div>
+    <div class="col-md-5">
+      <button mat-raised-button color="primary" (click)="refreshData()">Refresh Data</button>
+    </div>
+  </div>
+</div>
+<div class="mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource">
+
+    <!-- Position Column -->
+    <ng-container matColumnDef="AttachDate">
+      <th mat-header-cell *matHeaderCellDef> Month </th>
+      <td mat-cell *matCellDef="let element"> {{element.AttachDate}} </td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="Reserch">
+      <th mat-header-cell *matHeaderCellDef> Resrach & Develoment </th>
+      <td mat-cell *matCellDef="let element"> {{element.Reserch}} </td>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="Canteen">
+      <th mat-header-cell *matHeaderCellDef> Canteen </th>
+      <td mat-cell *matCellDef="let element"> {{element.Canteen}} </td>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="Car">
+      <th mat-header-cell *matHeaderCellDef> CEO's Car </th>
+      <td mat-cell *matCellDef="let element"> {{element.Car}} </td>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="Marketing">
+      <th mat-header-cell *matHeaderCellDef> Marketing </th>
+      <td mat-cell *matCellDef="let element"> {{element.Marketing}} </td>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="Parking">
+      <th mat-header-cell *matHeaderCellDef> parking Fines </th>
+      <td mat-cell *matCellDef="let element"> {{element.Parking}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <mat-paginator [pageSizeOptions]="[5, 10]" showFirstLastButtons></mat-paginator>
+</div>

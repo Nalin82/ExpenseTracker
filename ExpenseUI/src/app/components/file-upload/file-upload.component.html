@@ -1,0 +1,47 @@
+<div class="container">
+  <div class="row justify-content-center mt-5">
+    <div class="col-md-6 text-center">
+      <div *ngIf="isLoading" class="loader">
+        <mat-spinner></mat-spinner>
+    </div>
+      <form [formGroup]="createFormGroup" class="text-center border border-light p-5" action="#!" (submit)="Create()">
+        <p class="h4 mb-4">Upload Excel File</p>
+        <mat-form-field appearance="fill">
+          <mat-label>Month and Year</mat-label>
+          <input matInput [matDatepicker]="dp" formControlName="dateFormControl">
+          <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+          <mat-datepicker #dp startView="multi-year" (yearSelected)="chosenYearHandler($event)"
+            (monthSelected)="chosenMonthHandler($event, dp)" panelClass="example-month-picker">
+          </mat-datepicker>
+          <mat-error *ngIf="createFormGroup.controls.dateFormControl.hasError('required')">
+            Date is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-toolbar>
+            <!-- Display files names -->
+            <input matInput [(ngModel)]="fileAttr" readonly name="name" [ngModelOptions]="{standalone: true}" />
+            <!-- Browse Button -->
+            <button mat-flat-button color="primary">
+              Browse File
+            </button>
+          </mat-toolbar>
+
+          <!-- Fetch selected filed on change -->
+          <input type="file" #fileInput id="uploadFile" (change)="onFileChange($event)" name="uploadFile"
+            accept=".xlsx, .xls, .csv" />
+          <input type="hidden" name="fileHidden" formControlName="excelInput" formControlName="uploadFileFormControl" />
+          <mat-error *ngIf="createFormGroup.controls.uploadFileFormControl.hasError('required')">
+            File is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+        <div>
+          <a href="assets/Expense.xlsx">Please download excel template here</a>
+          <br />
+          <br />
+          <button [disabled]="!createFormGroup.valid" mat-raised-button color="primary" type="submit">Create</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
